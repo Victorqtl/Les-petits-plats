@@ -15,13 +15,21 @@ function renderRecipes(recipes) {
         </div>
         <div>
           <h3 class="mb-4 text-xs text-gray-500">INGRÉDIENTS</h3>
-          ${recipe.ingredients.map(ingredient =>
-            `
-            <p>${ingredient.ingredient}</p>
-            <p>${ingredient.quantity}</p>
-            <p>${ingredient.unit}</p>
-            `
-          )}
+          <div class="card-content flex flex-wrap gap-y-5">
+          ${recipe.ingredients.map(ingredient => {
+            const ingredientName = ingredient.ingredient || '';
+            const quantity = ingredient.quantity !== undefined ? ingredient.quantity : '';
+            const unit = ingredient.unit || '';
+
+            return `
+              <div class="text-sm flex flex-col basis-1/2">
+                <p class="">${ingredientName}</p>
+                ${quantity ? `<p class="text-gray-500">${quantity} ${unit || ''}</p>` : ''}
+
+              </div>
+            `;
+          }).join('')}
+          </div>
         </div>
       </div>
     </div>
