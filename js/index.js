@@ -1,5 +1,5 @@
 import { renderRecipes } from './renders.js'
-import { openDropdown } from './dropdown.js'
+import { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter } from './dropdown.js'
 
 let currentRecipes
 let initialRecipes
@@ -26,23 +26,28 @@ mainSearch.addEventListener('input', e => {
         currentRecipes = [...initialRecipes];
         renderRecipes(currentRecipes);
         deleteSearchBtn.classList.add('hidden');
-        return;
+        return
     }
     
+    else if (searchValue.length >= 3){
     currentRecipes = initialRecipes.filter(recipe => {
         return recipe.name.toLowerCase().includes(searchValue) ||
-        recipe.description.toLowerCase().includes(searchValue) ||
         recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue));
     });
-    
+    }
     renderRecipes(currentRecipes);
     deleteSearchBtn.classList.remove('hidden');
+    
 });
 
 async function init() {
     initialRecipes = await getRecipes()
-    currentRecipes = [...initialRecipes]
-    renderRecipes(currentRecipes)
-    openDropdown()
+    currentRecipes = [...initialRecipes];
+    renderRecipes(currentRecipes);
+    openDropdown();
+    launchRenderDropdownElements(currentRecipes);
+    searchDropdownFilter(currentRecipes);
+    addFilter();
+    deleteFilter();
 }
-init()
+init();

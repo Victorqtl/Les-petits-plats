@@ -38,15 +38,15 @@
 </header>
 
 <body class="bg-custom-grey">
-    <div id="keywords-filters" class="max-w-[1300px] mt-5 mx-auto gap-16 flex flex-wrap items-start">
-        <div class="dropdown relative flex flex-col px-4 pt-4 bg-white rounded-xl">
-            <button class="dropdown-btn flex items-center gap-16 pb-4">
+    <div id="keywords-filters" class="max-w-[1300px] mt-5 mx-auto gap-16 flex flex-wrap items-center">
+        <div class="dropdown dropdown-ingredients w-52 relative flex flex-col pt-4 px-4 bg-white rounded-xl" data-type="ingredients">
+            <button class="dropdown-btn pb-4 flex justify-between">
                 <p class="font-manrope">Ingrédients</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-chevron lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
             </button>
             <div class="dropdown-content w-full px-4 pt-4 z-10 absolute left-0 top-10 space-y-3 bg-white rounded-b-xl hidden">
             <div class="relative mb-2">
-                <input class="w-full py-2 pl-2 border text-gray-500 text-sm font-manrope border-gray-300 rounded-sm outline-none" type="text">
+                <input class="dropdown-search-input w-full py-2 pl-2 border text-gray-500 text-sm font-manrope border-gray-300 rounded-sm outline-none" type="text">
                 <button class="dropdown-search-btn absolute top-1/2 transform -translate-y-1/2 right-3 text-gray-400">
                     <svg class="lucide lucide-search" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"/>
@@ -58,22 +58,19 @@
                     </svg>
                 </button>
             </div>
-            <div class="text-sm font-manrope -mx-4">
-                <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Jus de citron</p>
-                <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Glaçons</p>
-                <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Tomate</p>
+            <div class="filter-container flex flex-col h-56 overflow-y-scroll text-sm font-manrope -mx-4">
             </div>
             </div>
         </div>
 
-        <div class="dropdown relative flex flex-col px-4 pt-4 bg-white rounded-xl">
-            <button class="dropdown-btn flex items-center gap-16 pb-4">
+        <div class="dropdown dropdown-appliances w-52 relative flex flex-col px-4 pt-4 bg-white rounded-xl" data-type="appliances">
+            <button class="dropdown-btn flex items-center justify-between pb-4">
                 <p class="font-manrope">Appareils</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-chevron lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
             </button>
             <div class="dropdown-content w-full px-4 pt-4 z-10 absolute left-0 top-10 rounded-b-xl bg-white hidden">
             <div class="relative mb-2">
-                <input class="w-full py-2 pl-2 border border-gray-300 text-gray-500 text-sm font-manrope rounded-sm outline-none" type="text">
+                <input class="dropdown-search-input w-full py-2 pl-2 border border-gray-300 text-gray-500 text-sm font-manrope rounded-sm outline-none" type="text">
                 <button class="dropdown-search-btn absolute top-1/2 transform -translate-y-1/2 right-2 text-gray-400">
                     <svg class="lucide lucide-search" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"/>
@@ -85,22 +82,19 @@
                     </svg>
                 </button>
             </div>
-            <div class="text-sm font-manrope -mx-4">
-                <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Jus de citron</p>
-                <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Glaçons</p>
-                <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Tomate</p>
+            <div class="filter-container flex flex-col h-56 overflow-y-scroll text-sm font-manrope -mx-4">
             </div>
             </div>
         </div>
-
-        <div class="dropdown relative flex flex-col px-4 pt-4 bg-white rounded-xl">
-            <button class="dropdown-btn flex items-center gap-16 pb-4">
+        
+        <div class="dropdown dropdown-ustensils w-52 relative flex flex-col px-4 pt-4 bg-white rounded-xl" data-type="ustensils">
+            <button class="dropdown-btn flex items-center justify-between pb-4">
                 <p class="font-manrope">Ustensiles</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-chevron lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
             </button>
             <div class="dropdown-content w-full px-4 pt-4 z-10 absolute left-0 top-10 bg-white rounded-b-xl hidden">
             <div class="relative mb-2">
-                <input class="w-full py-2 pl-2 border text-gray-500 text-sm font-manrope border-gray-300 rounded-sm outline-none" type="text">
+                <input class="dropdown-search-input w-full py-2 pl-2 border text-gray-500 text-sm font-manrope border-gray-300 rounded-sm outline-none" type="text">
                 <button class="dropdown-search-btn absolute top-1/2 transform -translate-y-1/2 right-2 text-gray-400">
                     <svg class="lucide lucide-search" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"/>
@@ -112,18 +106,15 @@
                     </svg>
                 </button>
             </div>
-            <!-- <div>
-                <p class="my-3 -mx-4  px-4 py-2 bg-custom-yellow text-sm font-manrope">Jus de Citron</p>
-            </div> -->
-                <div class="text-sm font-manrope -mx-4">
-                    <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Jus de citron</p>
-                    <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Glaçons</p>
-                    <p class="px-4 py-2 cursor-pointer hover:bg-custom-yellow">Tomate</p>
+                <div class="filter-container ustensils-filters flex flex-col h-56 overflow-y-scroll text-sm font-manrope -mx-4">
                 </div>
             </div>
         </div>
-        <h2 id="counter" class="font-anton text-xl ml-auto mt-4">1500 recettes</h2>
+        <h2 id="counter" class="font-anton text-xl ml-auto">1500 recettes</h2>
     </div>
+
+    <div class="current-filter max-w-[1300px] mt-5 mx-auto flex flex-wrap gap-16 ">
+    </div>    
 
    <div id="recipes-container" class="max-w-[1300px] mx-auto mt-14 flex flex-wrap gap-[74px]">
    </div>
