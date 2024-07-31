@@ -137,7 +137,7 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
                 }).join('');
 
                 addFilter(currentRecipes, initialRecipes);
-                deleteFilter(currentRecipes, initialRecipes)
+                deleteFilter(currentRecipes, initialRecipes);
                 reapplyActiveFilters();
                 applyFilters(currentRecipes, initialRecipes);
             }
@@ -211,6 +211,7 @@ function addFilter(currentRecipes, initialRecipes) {
                 element.classList.remove('bg-custom-yellow');
                 activeFilters.delete(item);
                 applyFilters(currentRecipes, initialRecipes);
+                updateDropdownsWithFilteredRecipes(currentRecipes, initialRecipes);
             });
 
             container.appendChild(paragraph);
@@ -220,6 +221,7 @@ function addFilter(currentRecipes, initialRecipes) {
             currentFilter.appendChild(container);
 
             applyFilters(currentRecipes, initialRecipes);
+            
         });
     });
 }
@@ -229,16 +231,22 @@ function applyFilters(currentRecipes, initialRecipes) {
         renderRecipes(initialRecipes);
         return;
     }
+
     currentRecipes = initialRecipes.filter(recipe => {
-        const hasActiveIngredient = recipe.ingredients.some(ingredient => activeFilters.has(ingredient.ingredient));
-        const hasActiveAppliance = activeFilters.has(recipe.appliance);
-        const hasActiveUstensil = recipe.ustensils.some(ustensil => activeFilters.has(ustensil));
+        console.log("Recipe:", recipe);
+
+        const hasActiveIngredient = recipe.ingredients.some(ingredient => activeFilters.has(capitalizeFirstLetter(ingredient.ingredient)));
+        const hasActiveAppliance = activeFilters.has(capitalizeFirstLetter(recipe.appliance)); 
+        const hasActiveUstensil = recipe.ustensils.some(ustensil => activeFilters.has(capitalizeFirstLetter(ustensil)));
 
         return hasActiveIngredient || hasActiveAppliance || hasActiveUstensil;
     });
+    
     renderRecipes(currentRecipes);
+    updateDropdownsWithFilteredRecipes(currentRecipes, initialRecipes);
 }
 
+// Maintient le style sur les filtres sélectionnés dans la dropdown 
 function reapplyActiveFilters() {
     const filterContent = document.querySelectorAll('.filter-content');
     filterContent.forEach(element => {
@@ -268,10 +276,12 @@ function deleteFilter(currentRecipes, initialRecipes) {
                 filterContent.classList.remove('bg-custom-yellow');
 
                 applyFilters(currentRecipes, initialRecipes);
-                
+                updateDropdownsWithFilteredRecipes(currentRecipes, initialRecipes);
             });
         }
     });
 }
 
-export { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter, updateDropdownsWithFilteredRecipes }
+
+
+export { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter, updateDropdownsWithFilteredRecipes, applyFilters, activeFilters }

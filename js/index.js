@@ -1,5 +1,5 @@
 import { renderRecipes } from './renders.js'
-import { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter, updateDropdownsWithFilteredRecipes } from './dropdown.js'
+import { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter, updateDropdownsWithFilteredRecipes, applyFilters, activeFilters } from './dropdown.js'
 
 let currentRecipes
 let initialRecipes
@@ -17,6 +17,7 @@ deleteSearchBtn.addEventListener('click', () => {
     renderRecipes(currentRecipes);
     updateDropdownsWithFilteredRecipes(initialRecipes, initialRecipes);
     deleteSearchBtn.classList.add('hidden');
+    clearFilters();
 })
 
 const mainSearch = document.getElementById('main-search')
@@ -28,6 +29,7 @@ mainSearch.addEventListener('input', e => {
         renderRecipes(currentRecipes);
         updateDropdownsWithFilteredRecipes(initialRecipes, initialRecipes);
         deleteSearchBtn.classList.add('hidden');
+        clearFilters()
         return
     }
 
@@ -36,13 +38,31 @@ mainSearch.addEventListener('input', e => {
             return recipe.name.toLowerCase().includes(searchValue) ||
                 recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue));
         });
-        
+
     }
     renderRecipes(currentRecipes);
     updateDropdownsWithFilteredRecipes(currentRecipes, currentRecipes);
     deleteSearchBtn.classList.remove('hidden');
 
 });
+
+// Supprimer les filtres à la suppression de la recherche principale 
+function clearFilters() {
+    const currentFilterContainer = document.querySelector('.current-filter');
+    const filterContents = document.querySelectorAll('.filter-content');
+    const deleteButtons = document.querySelectorAll('.delete-filter');
+    if (currentFilterContainer) {
+        currentFilterContainer.innerHTML = '';
+        deleteButtons.forEach(deleteButton => {
+            deleteButton.classList.add('hidden')
+        })
+        filterContents.forEach(filterContent => {
+            filterContent.classList.remove('bg-custom-yellow');
+        })
+    }
+    activeFilters.clear();
+    applyFilters(initialRecipes, initialRecipes);
+}
 
 async function init() {
     initialRecipes = await getRecipes()
@@ -54,4 +74,5 @@ async function init() {
     addFilter(currentRecipes, initialRecipes);
     deleteFilter(currentRecipes, initialRecipes);
 }
+
 init();
