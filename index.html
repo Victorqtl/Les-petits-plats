@@ -12,36 +12,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 </head>
-<header>
-    <section id="hero-section" class="relative h-[650px] bg-custom-image bg-center bg-no-repeat bg-cover object-cover flex items-center justify-center">
-        <div class="absolute top-10 left-14 flex items-center gap-1">
-            <h1 class="font-anton text-3xl text-white">LES PETITS PLATS</h1>
-            <img class="w-7" src="./photos/logo.png" alt="Logo">
-        </div>
-            <div class="w-full flex flex-col justify-center items-center gap-7 text-center">
-                <h2 class="max-w-3xl font-anton text-custom-yellow text-5xl leading-normal">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h2>
-                <div class="relative w-4/6">
-                    <input class="search-input w-full pl-9 py-6 rounded-xl outline-none" type="text" id="main-search" placeholder="Rechercher une recette, un ingrédient, ...">
-                    <button class="search-btn absolute top-1/2 transform -translate-y-1/2 right-3">
-                        <svg class="lucide lucide-search p-2.5 text-white bg-slate-900 rounded-xl hover:bg-custom-yellow hover:text-black" xmlns="http://www.w3.org/2000/svg" width="49" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="m21 21-4.3-4.3"/>
-                        </svg>
-                    </button>
-                    <button class="delete-search-btn absolute top-1/2 transform -translate-y-1/2 hidden right-20 text-gray-400">
-                        <svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-    </section>
-</header>
 
 <body class="bg-custom-grey">
+    
+    <header>
+        <section id="hero-section" class="relative h-[650px] bg-custom-image bg-center bg-no-repeat bg-cover object-cover flex items-center justify-center">
+            <div class="absolute top-10 left-14 flex items-center gap-1">
+                <h1 class="font-anton text-3xl text-white">LES PETITS PLATS</h1>
+                <img class="w-7" src="./photos/logo.png" alt="Logo">
+            </div>
+                <div class="w-full flex flex-col justify-center items-center gap-7 text-center">
+                    <h2 class="max-w-3xl font-anton text-custom-yellow text-5xl leading-normal">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h2>
+                    <div class="relative w-4/6">
+                        <input class="search-input w-full pl-9 py-6 rounded-xl outline-none" type="text" id="main-search" placeholder="Rechercher une recette, un ingrédient, ...">
+                        <button class="search-btn absolute top-1/2 transform -translate-y-1/2 right-3">
+                            <svg class="lucide lucide-search p-2.5 text-white bg-slate-900 rounded-xl hover:bg-custom-yellow hover:text-black" xmlns="http://www.w3.org/2000/svg" width="49" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+                        </button>
+                        <button class="delete-search-btn absolute top-1/2 transform -translate-y-1/2 hidden right-20 text-gray-400">
+                            <svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+        </section>
+    </header>
+
     <div id="keywords-filters" class="max-w-[1300px] mt-5 mx-auto gap-16 flex flex-wrap items-center">
         <div class="dropdown dropdown-ingredients w-52 relative flex flex-col pt-4 px-4 bg-white rounded-xl" data-type="ingredients">
             <button class="dropdown-btn pb-4 flex justify-between">
-                <p class="font-manrope">Ingrédients</p>
+                <span class="font-manrope">Ingrédients</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-chevron lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
             </button>
             <div class="dropdown-content w-full px-4 pt-4 z-10 absolute left-0 top-10 space-y-3 bg-white rounded-b-xl hidden">
@@ -65,7 +67,7 @@
 
         <div class="dropdown dropdown-appliances w-52 relative flex flex-col px-4 pt-4 bg-white rounded-xl" data-type="appliances">
             <button class="dropdown-btn flex items-center justify-between pb-4">
-                <p class="font-manrope">Appareils</p>
+                <span class="font-manrope">Appareils</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-chevron lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
             </button>
             <div class="dropdown-content w-full px-4 pt-4 z-10 absolute left-0 top-10 rounded-b-xl bg-white hidden">
@@ -89,7 +91,7 @@
         
         <div class="dropdown dropdown-ustensils w-52 relative flex flex-col px-4 pt-4 bg-white rounded-xl" data-type="ustensils">
             <button class="dropdown-btn flex items-center justify-between pb-4">
-                <p class="font-manrope">Ustensiles</p>
+                <span class="font-manrope">Ustensiles</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-chevron lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg> 
             </button>
             <div class="dropdown-content w-full px-4 pt-4 z-10 absolute left-0 top-10 bg-white rounded-b-xl hidden">
