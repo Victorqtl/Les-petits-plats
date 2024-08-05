@@ -1,5 +1,5 @@
 import { renderRecipes } from './renders.js'
-import { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter, updateDropdownsWithFilteredRecipes, applyFilters, activeFilters } from './dropdown.js'
+import { openDropdown, launchRenderDropdownElements, searchDropdownFilter, addFilter, deleteFilter, updateDropdownsWithFilteredRecipes, applyFilters, activeIngredientFilters, activeApplianceFilters, activeUstensilFilters } from './dropdown.js'
 
 let currentRecipes
 let initialRecipes
@@ -60,7 +60,9 @@ function clearFilters() {
             filterContent.classList.remove('bg-custom-yellow');
         })
     }
-    activeFilters.clear();
+    activeIngredientFilters.clear()
+    activeApplianceFilters.clear()
+    activeUstensilFilters.clear()
     applyFilters(initialRecipes, initialRecipes);
 }
 
@@ -69,10 +71,11 @@ async function init() {
     currentRecipes = [...initialRecipes];
     renderRecipes(currentRecipes);
     openDropdown();
-    launchRenderDropdownElements(initialRecipes);
+    launchRenderDropdownElements(currentRecipes);
     searchDropdownFilter(currentRecipes, initialRecipes);
     addFilter(currentRecipes, initialRecipes);
     deleteFilter(currentRecipes, initialRecipes);
 }
 
 init();
+
