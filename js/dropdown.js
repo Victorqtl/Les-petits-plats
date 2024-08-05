@@ -41,7 +41,7 @@ function updateDropdownsWithFilteredRecipes(filteredRecipes, initialRecipes) {
     renderDropdownElements(document.querySelector(".dropdown-ingredients"), filteredRecipes);
     renderDropdownElements(document.querySelector(".dropdown-appliances"), filteredRecipes);
     renderDropdownElements(document.querySelector(".dropdown-ustensils"), filteredRecipes);
-    
+
     addFilter(filteredRecipes, initialRecipes);
     deleteFilter(filteredRecipes, initialRecipes);
     reapplyActiveFilters();
@@ -103,7 +103,7 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
                 }
 
                 deleteSearchBtn.classList.remove('hidden');
-                
+
                 const filteredItems = new Set();
                 currentRecipes.forEach(recipe => {
                     if (dropdown.dataset.type === "ingredients") {
@@ -124,7 +124,7 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
                         });
                     }
                 });
-                
+
                 const filterContainer = dropdown.querySelector(".filter-container");
                 filterContainer.innerHTML = [...filteredItems].map(item => {
                     return `
@@ -134,7 +134,7 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
                     </div>
                     `;
                 }).join('');
-                
+
                 deleteSearchDropdown(currentRecipes, initialRecipes);
                 addFilter(currentRecipes, initialRecipes);
                 deleteFilter(currentRecipes, initialRecipes);
@@ -194,10 +194,10 @@ function addFilter(currentRecipes, initialRecipes) {
                         activeIngredientFilters.add(item.toLowerCase());
                         break;
                     case 'appliances':
-                        activeApplianceFilters.add(item.toLowerCase())    
+                        activeApplianceFilters.add(item.toLowerCase())
                         break;
                     case 'ustensils':
-                        activeUstensilFilters.add(item.toLowerCase())    
+                        activeUstensilFilters.add(item.toLowerCase())
                         break;
                 }
             }
@@ -209,13 +209,13 @@ function addFilter(currentRecipes, initialRecipes) {
 
             const dropdownSearchInputs = document.querySelectorAll(".dropdown-search-input");
             dropdownSearchInputs.forEach(input => {
-                 input.value = '';
-                 })
+                input.value = '';
+            })
 
             const dropdownDeleteSearchBtns = document.querySelectorAll(".dropdown-delete-search-btn");
             dropdownDeleteSearchBtns.forEach(btn => {
                 btn.classList.add('hidden');
-            })            
+            })
 
             const container = document.createElement('div');
             container.className = 'tag w-52 p-4 flex items-center justify-between bg-custom-yellow rounded-xl';
@@ -240,7 +240,7 @@ function addFilter(currentRecipes, initialRecipes) {
                 else if (activeUstensilFilters.has(item.toLowerCase())) {
                     activeUstensilFilters.delete(item.toLowerCase());
                 }
-                
+
                 applyFilters(currentRecipes, initialRecipes);
                 updateDropdownsWithFilteredRecipes(initialRecipes, initialRecipes);
             });
@@ -291,7 +291,7 @@ function deleteFilter(currentRecipes, initialRecipes) {
                         tag.remove();
                     }
                 });
-                
+
                 if (activeIngredientFilters.has(item.toLowerCase())) {
                     activeIngredientFilters.delete(item.toLowerCase());
                 }
@@ -312,7 +312,7 @@ function deleteFilter(currentRecipes, initialRecipes) {
 function applyFilters(currentRecipes, initialRecipes) {
     currentRecipes = initialRecipes.filter(recipe => {
         const hasActiveIngredient = Array.from(activeIngredientFilters).every(activeIngredient =>
-            recipe.ingredients.some(ingredient => 
+            recipe.ingredients.some(ingredient =>
                 ingredient.ingredient.toLowerCase() === activeIngredient
             )
         );
@@ -320,14 +320,14 @@ function applyFilters(currentRecipes, initialRecipes) {
             recipe.appliance.toLowerCase() === activeAppliance
         );
         const hasActiveUstensil = Array.from(activeUstensilFilters).every(activeUstensil =>
-            recipe.ustensils.some(ustensil => 
+            recipe.ustensils.some(ustensil =>
                 ustensil.toLowerCase() === activeUstensil
             )
         );
 
         return hasActiveIngredient && hasActiveAppliance && hasActiveUstensil;
     });
-    
+
     renderRecipes(currentRecipes);
     updateDropdownsWithFilteredRecipes(currentRecipes, initialRecipes);
 }
