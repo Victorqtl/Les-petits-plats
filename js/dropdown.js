@@ -1,4 +1,4 @@
-import { renderRecipes } from "./renders.js";
+import { renderRecipes } from './renders.js';
 
 function openDropdown() {
     const dropdownBtn = document.querySelectorAll('.dropdown-btn');
@@ -12,7 +12,7 @@ function openDropdown() {
                 const chevronSvg = dropdown.querySelector('.lucide-chevron');
 
                 if (dropdownContent) {
-                    dropdownContent.classList.toggle("hidden");
+                    dropdownContent.classList.toggle('hidden');
                 }
 
                 if (chevronSvg) {
@@ -32,15 +32,15 @@ function openDropdown() {
 }
 
 function launchRenderDropdownElements(recipes) {
-    renderDropdownElements(document.querySelector(".dropdown-ingredients"), recipes);
-    renderDropdownElements(document.querySelector(".dropdown-appliances"), recipes);
-    renderDropdownElements(document.querySelector(".dropdown-ustensils"), recipes);
+    renderDropdownElements(document.querySelector('.dropdown-ingredients'), recipes);
+    renderDropdownElements(document.querySelector('.dropdown-appliances'), recipes);
+    renderDropdownElements(document.querySelector('.dropdown-ustensils'), recipes);
 }
 
 function updateDropdownsWithFilteredRecipes(filteredRecipes, initialRecipes) {
-    renderDropdownElements(document.querySelector(".dropdown-ingredients"), filteredRecipes);
-    renderDropdownElements(document.querySelector(".dropdown-appliances"), filteredRecipes);
-    renderDropdownElements(document.querySelector(".dropdown-ustensils"), filteredRecipes);
+    renderDropdownElements(document.querySelector('.dropdown-ingredients'), filteredRecipes);
+    renderDropdownElements(document.querySelector('.dropdown-appliances'), filteredRecipes);
+    renderDropdownElements(document.querySelector('.dropdown-ustensils'), filteredRecipes);
 
     addFilter(filteredRecipes, initialRecipes);
     deleteFilter(filteredRecipes, initialRecipes);
@@ -54,18 +54,18 @@ function capitalizeFirstLetter(string) {
 }
 
 function renderDropdownElements(dropdown, recipes) {
-    const filterContainer = dropdown.querySelector(".filter-container");
+    const filterContainer = dropdown.querySelector('.filter-container');
 
     const filterSet = new Set();
 
     recipes.forEach(recipe => {
-        if (dropdown.dataset.type === "ingredients") {
+        if (dropdown.dataset.type === 'ingredients') {
             recipe.ingredients.forEach(ingredient => {
                 filterSet.add(capitalizeFirstLetter(ingredient.ingredient));
             });
-        } else if (dropdown.dataset.type === "appliances") {
+        } else if (dropdown.dataset.type === 'appliances') {
             filterSet.add(capitalizeFirstLetter(recipe.appliance));
-        } else if (dropdown.dataset.type === "ustensils") {
+        } else if (dropdown.dataset.type === 'ustensils') {
             recipe.ustensils.forEach(ustensil => {
                 filterSet.add(capitalizeFirstLetter(ustensil));
             });
@@ -74,17 +74,16 @@ function renderDropdownElements(dropdown, recipes) {
 
     filterContainer.innerHTML = [...filterSet].map(item => {
         return `
-            <div class="filter-content flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-custom-yellow">
-                <p class ="filter-element" data-item="${item}">${item}</p>
-                <button class="delete-filter hidden"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> </button>
+            <div class='filter-content flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-custom-yellow'>
+                <p class='filter-element' data-item='${item}'>${item}</p>
+                <button class='delete-filter hidden'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-x'><path d='M18 6 6 18'/><path d='m6 6 12 12'/></svg> </button>
             </div>
             `;
     }).join('');
 }
 
-
 function searchDropdownFilter(currentRecipes, initialRecipes) {
-    const dropdownSearchInputs = document.querySelectorAll(".dropdown-search-input");
+    const dropdownSearchInputs = document.querySelectorAll('.dropdown-search-input');
 
     dropdownSearchInputs.forEach(function (dropdownSearchInput) {
         dropdownSearchInput.addEventListener('input', function (e) {
@@ -106,17 +105,17 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
 
                 const filteredItems = new Set();
                 currentRecipes.forEach(recipe => {
-                    if (dropdown.dataset.type === "ingredients") {
+                    if (dropdown.dataset.type === 'ingredients') {
                         recipe.ingredients.forEach(ingredient => {
                             if (ingredient.ingredient.toLowerCase().includes(searchValue)) {
                                 filteredItems.add(capitalizeFirstLetter(ingredient.ingredient));
                             }
                         });
-                    } else if (dropdown.dataset.type === "appliances") {
+                    } else if (dropdown.dataset.type === 'appliances') {
                         if (recipe.appliance.toLowerCase().includes(searchValue)) {
                             filteredItems.add(capitalizeFirstLetter(recipe.appliance));
                         }
-                    } else if (dropdown.dataset.type === "ustensils") {
+                    } else if (dropdown.dataset.type === 'ustensils') {
                         recipe.ustensils.forEach(ustensil => {
                             if (ustensil.toLowerCase().includes(searchValue)) {
                                 filteredItems.add(capitalizeFirstLetter(ustensil));
@@ -125,12 +124,12 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
                     }
                 });
 
-                const filterContainer = dropdown.querySelector(".filter-container");
+                const filterContainer = dropdown.querySelector('.filter-container');
                 filterContainer.innerHTML = [...filteredItems].map(item => {
                     return `
-                    <div class="filter-content flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-custom-yellow">
-                    <p class="filter-element" data-item="${item}">${item}</p>
-                    <button class="delete-filter hidden"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> </button>
+                    <div class='filter-content flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-custom-yellow'>
+                    <p class='filter-element' data-item='${item}'>${item}</p>
+                    <button class='delete-filter hidden'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-x'><path d='M18 6 6 18'/><path d='m6 6 12 12'/></svg> </button>
                     </div>
                     `;
                 }).join('');
@@ -145,7 +144,7 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
 }
 
 function deleteSearchDropdown(currentRecipes, initialRecipes) {
-    const dropdownDeleteSearchBtns = document.querySelectorAll(".dropdown-delete-search-btn");
+    const dropdownDeleteSearchBtns = document.querySelectorAll('.dropdown-delete-search-btn');
     dropdownDeleteSearchBtns.forEach(function (dropdownDeleteSearchBtn) {
         dropdownDeleteSearchBtn.addEventListener('click', function () {
             const dropdown = this.closest('.dropdown');
@@ -207,12 +206,12 @@ function addFilter(currentRecipes, initialRecipes) {
 
             deleteFilter.classList.remove('hidden');
 
-            const dropdownSearchInputs = document.querySelectorAll(".dropdown-search-input");
+            const dropdownSearchInputs = document.querySelectorAll('.dropdown-search-input');
             dropdownSearchInputs.forEach(input => {
                 input.value = '';
             })
 
-            const dropdownDeleteSearchBtns = document.querySelectorAll(".dropdown-delete-search-btn");
+            const dropdownDeleteSearchBtns = document.querySelectorAll('.dropdown-delete-search-btn');
             dropdownDeleteSearchBtns.forEach(btn => {
                 btn.classList.add('hidden');
             })
