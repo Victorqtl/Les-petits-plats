@@ -37,7 +37,8 @@ mainSearch.addEventListener('input', e => {
         const filteredRecipes = [];
         for (let i = 0; i < initialRecipes.length; i++) {
             const recipe = initialRecipes[i];
-            if (recipe.name.toLowerCase().includes(searchValue)) {
+            if (recipe.name.toLowerCase().includes(searchValue) || 
+                recipe.description.toLowerCase().includes(searchValue)) {
                 filteredRecipes.push(recipe);
             } else {
                 for (let j = 0; j < recipe.ingredients.length; j++) {
@@ -50,10 +51,14 @@ mainSearch.addEventListener('input', e => {
             }
         }
         currentRecipes = filteredRecipes;
+        if (currentRecipes.length === 0) {
+            const errorMessage = document.querySelector('.error-message');
+            errorMessage.innerHTML = 'Aucun résultat';
+        }
+        renderRecipes(currentRecipes);
+        updateDropdownsWithFilteredRecipes(currentRecipes, currentRecipes);
+        deleteSearchBtn.classList.remove('hidden');
     }
-    renderRecipes(currentRecipes);
-    updateDropdownsWithFilteredRecipes(currentRecipes, currentRecipes);
-    deleteSearchBtn.classList.remove('hidden');
 });
 
 // Supprimer les filtres à la suppression de la recherche principale 
