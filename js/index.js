@@ -37,13 +37,18 @@ mainSearch.addEventListener('input', e => {
     else if (searchValue.length >= 3) {
         currentRecipes = initialRecipes.filter(recipe => {
             return recipe.name.toLowerCase().includes(searchValue) ||
-                recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue));
+                recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)) ||
+                recipe.description.toLowerCase().includes(searchValue);
         });
+        if (currentRecipes.length === 0) {
+            const errorMessage = document.querySelector('.error-message');
+            errorMessage.innerHTML = 'Aucun résultat'
 
+        }
+        renderRecipes(currentRecipes);
+        updateDropdownsWithFilteredRecipes(currentRecipes, currentRecipes);
+        deleteSearchBtn.classList.remove('hidden');
     }
-    renderRecipes(currentRecipes);
-    updateDropdownsWithFilteredRecipes(currentRecipes, currentRecipes);
-    deleteSearchBtn.classList.remove('hidden');
 
 });
 
