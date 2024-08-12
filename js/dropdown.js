@@ -1,10 +1,12 @@
 import { renderRecipes } from './renders.js';
 
+// Ouverture de la dropdown
 function openDropdown() {
     const dropdownBtn = document.querySelectorAll('.dropdown-btn');
 
     dropdownBtn.forEach(btn => {
         btn.addEventListener('click', function () {
+            // .closest pour sélectionner la dropdown concerné par le click
             const dropdown = this.closest('.dropdown');
 
             if (dropdown) {
@@ -31,12 +33,14 @@ function openDropdown() {
     });
 }
 
+// Affiche les éléments dans la dropdown
 function launchRenderDropdownElements(recipes) {
     renderDropdownElements(document.querySelector('.dropdown-ingredients'), recipes);
     renderDropdownElements(document.querySelector('.dropdown-appliances'), recipes);
     renderDropdownElements(document.querySelector('.dropdown-ustensils'), recipes);
 }
 
+// Affiches les nouveaux éléments filtrer par la recherche dans la dropdown
 function updateDropdownsWithFilteredRecipes(filteredRecipes, initialRecipes) {
     renderDropdownElements(document.querySelector('.dropdown-ingredients'), filteredRecipes);
     renderDropdownElements(document.querySelector('.dropdown-appliances'), filteredRecipes);
@@ -48,15 +52,18 @@ function updateDropdownsWithFilteredRecipes(filteredRecipes, initialRecipes) {
     searchDropdownFilter(filteredRecipes, initialRecipes);
 }
 
+// Fonction pour afficher les élements avec première lettre en masjuscule et le reste en minuscule
 function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
+// Tri chaque éléments dans la dropdown correspondante grâce à dataset
 function renderDropdownElements(dropdown, recipes) {
     const filterContainer = dropdown.querySelector('.filter-container');
 
-    const filterSet = new Set();
+    // Set() pour 
+    const filterSet = new Set(); // Méthode set pour créer un objet qui n'a que des valeurs uniques et éviter les doublons dans les ingredients
 
     recipes.forEach(recipe => {
         if (dropdown.dataset.type === 'ingredients') {
@@ -72,6 +79,7 @@ function renderDropdownElements(dropdown, recipes) {
         }
     });
 
+    // Transforme les éléments en chaîne de caractère pour les afficher dans la dropdown
     filterContainer.innerHTML = [...filterSet].map(item => {
         return `
             <div class='filter-content flex justify-between items-center py-2 px-4 cursor-pointer hover:bg-custom-yellow'>
@@ -82,11 +90,13 @@ function renderDropdownElements(dropdown, recipes) {
     }).join('');
 }
 
+// Permet d'effectuer une recherche dans la dropdown
 function searchDropdownFilter(currentRecipes, initialRecipes) {
     const dropdownSearchInputs = document.querySelectorAll('.dropdown-search-input');
 
     dropdownSearchInputs.forEach(function (dropdownSearchInput) {
         dropdownSearchInput.addEventListener('input', function (e) {
+            // .closest pour savoir dans quelle dropdown on se situe
             const dropdown = this.closest('.dropdown');
             const searchValue = e.target.value.toLowerCase();
             if (dropdown) {
@@ -143,6 +153,7 @@ function searchDropdownFilter(currentRecipes, initialRecipes) {
     });
 }
 
+// Bouton pour supprimer la recherche dans l'input de la dropdown
 function deleteSearchDropdown(currentRecipes, initialRecipes) {
     const dropdownDeleteSearchBtns = document.querySelectorAll('.dropdown-delete-search-btn');
     dropdownDeleteSearchBtns.forEach(function (dropdownDeleteSearchBtn) {
@@ -166,6 +177,7 @@ const activeIngredientFilters = new Set();
 const activeApplianceFilters = new Set();
 const activeUstensilFilters = new Set();
 
+// Ajoute l'élément sous forme de tag sous la dropdown 
 function addFilter(currentRecipes, initialRecipes) {
     const filterContent = document.querySelectorAll('.filter-content');
 
@@ -187,6 +199,7 @@ function addFilter(currentRecipes, initialRecipes) {
                     chevronSvg.classList.add('lucide-chevron-down');
                     chevronSvg.innerHTML = '<path d="m6 9 6 6 6-6"/>';
                 }
+                // Ajoute l'élément en fonction de son type à une liste active
                 const dataType = dropdown.getAttribute('data-type')
                 switch (dataType) {
                     case 'ingredients':
@@ -202,10 +215,12 @@ function addFilter(currentRecipes, initialRecipes) {
             }
 
             element.classList.add('bg-custom-yellow');
+            // Ferme la dropdown au click d'un élément
             element.closest('.dropdown-content').classList.add('hidden');
 
             deleteFilter.classList.remove('hidden');
 
+            // Reset l'input en cas de recherche
             const dropdownSearchInputs = document.querySelectorAll('.dropdown-search-input');
             dropdownSearchInputs.forEach(input => {
                 input.value = '';
@@ -216,12 +231,14 @@ function addFilter(currentRecipes, initialRecipes) {
                 btn.classList.add('hidden');
             })
 
+            // Applique le style des tags
             const container = document.createElement('div');
             container.className = 'tag w-52 p-4 flex items-center justify-between bg-custom-yellow rounded-xl';
 
             const paragraph = document.createElement('p');
             paragraph.textContent = item;
 
+            // Supprime l'élément depuis le taf
             const button = document.createElement('button');
             button.className = 'delete-filter';
             button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
@@ -230,6 +247,7 @@ function addFilter(currentRecipes, initialRecipes) {
                 deleteFilter.classList.add('hidden');
                 element.classList.remove('bg-custom-yellow');
 
+                // Supprime l'élément de la liste active
                 if (activeIngredientFilters.has(item.toLowerCase())) {
                     activeIngredientFilters.delete(item.toLowerCase());
                 }
@@ -261,6 +279,7 @@ function reapplyActiveFilters() {
     const filterContent = document.querySelectorAll('.filter-content');
     filterContent.forEach(element => {
         const item = element.querySelector('.filter-element').dataset.item;
+        // Vérifie si l'élément est dans une liste active avec .has
         if (activeIngredientFilters.has(item.toLowerCase()) || activeApplianceFilters.has(item.toLowerCase()) || activeUstensilFilters.has(item.toLowerCase())) {
             element.classList.add('bg-custom-yellow');
 
@@ -272,6 +291,7 @@ function reapplyActiveFilters() {
     });
 }
 
+// Supprime le tag depuis l'élément dans la dropdown
 function deleteFilter(currentRecipes, initialRecipes) {
     const filterContent = document.querySelectorAll('.filter-content');
     filterContent.forEach(filterContent => {
@@ -286,11 +306,13 @@ function deleteFilter(currentRecipes, initialRecipes) {
                 const tags = document.querySelectorAll('.tag');
                 tags.forEach(tag => {
                     const tagContent = tag.querySelector('p').textContent;
+                    // Vérifie si le tag correspond à l'item de la dropdown
                     if (tagContent === item) {
                         tag.remove();
                     }
                 });
 
+                // Supprime l'élément de la liste active
                 if (activeIngredientFilters.has(item.toLowerCase())) {
                     activeIngredientFilters.delete(item.toLowerCase());
                 }
@@ -308,8 +330,11 @@ function deleteFilter(currentRecipes, initialRecipes) {
     });
 }
 
+// Affiche les nouvelles recettes correspondantes aux filtres ajoutés dans les listes active
 function applyFilters(currentRecipes, initialRecipes) {
     currentRecipes = initialRecipes.filter(recipe => {
+        // Transforme les objets Set en tableaux pour appliquer les méthodes .every 
+        // Pour chaque éléments dans la liste active, compare l'éléments à celui de la recette
         const hasActiveIngredient = Array.from(activeIngredientFilters).every(activeIngredient =>
             recipe.ingredients.some(ingredient =>
                 ingredient.ingredient.toLowerCase() === activeIngredient
@@ -327,6 +352,7 @@ function applyFilters(currentRecipes, initialRecipes) {
         return hasActiveIngredient && hasActiveAppliance && hasActiveUstensil;
     });
 
+    // Applique les nouvelles recettes et dropdown filtrées
     renderRecipes(currentRecipes);
     updateDropdownsWithFilteredRecipes(currentRecipes, initialRecipes);
 }

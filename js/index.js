@@ -20,6 +20,7 @@ deleteSearchBtn.addEventListener('click', () => {
     clearFilters();
 })
 
+
 const mainSearch = document.getElementById('main-search')
 mainSearch.addEventListener('input', e => {
     const searchValue = e.target.value.toLowerCase();

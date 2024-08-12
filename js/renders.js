@@ -1,3 +1,4 @@
+// Transforme chaque recettes en une chaîne de caractères pour en faire une card
 function renderRecipes(recipes) {
   const recipesContainer = document.getElementById('recipes-container')
   recipesContainer.innerHTML = recipes.map(recipe =>
@@ -17,6 +18,7 @@ function renderRecipes(recipes) {
           <h3 class="mb-4 text-xs text-gray-500">INGRÉDIENTS</h3>
           <div class="card-content flex flex-wrap gap-y-5">
           ${recipe.ingredients.map(ingredient => {
+            // Méthode .map pour ingredient car il s'agit d'un tableau
       const ingredientName = ingredient.ingredient || '';
       const quantity = ingredient.quantity !== undefined ? ingredient.quantity : '';
       const unit = ingredient.unit || '';
@@ -33,7 +35,7 @@ function renderRecipes(recipes) {
         </div>
       </div>
     </div>
-  `).join('')
+  `).join('') // Permet de concaténer toutes les chaînes de caractères en une seule
   document.getElementById('counter').innerText = recipes.length + ' recettes'
 }
 export { renderRecipes }
