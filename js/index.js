@@ -42,7 +42,7 @@ mainSearch.addEventListener('input', e => {
         });
         if (currentRecipes.length === 0) {
             const errorMessage = document.querySelector('.error-message');
-            errorMessage.innerHTML = 'Aucun résultat'
+            errorMessage.innerHTML = `Aucune recette ne contient '${searchValue}' vous pouvez chercher « tarte aux pommes », « poisson », etc.`
 
         }
         renderRecipes(currentRecipes);
